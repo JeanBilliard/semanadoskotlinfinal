@@ -1,4 +1,4 @@
-package com.example.retroexample_157_2
+package com.example.retroexample_157_2.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,6 +9,8 @@ import android.widget.Button
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.example.retroexample_157_2.viemodel.MarsViewModel
+import com.example.retroexample_157_2.R
 import com.example.retroexample_157_2.databinding.FragmentFirstBinding
 
 /**

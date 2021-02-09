@@ -1,4 +1,4 @@
-package com.example.retroexample_157_2.remote
+package com.example.retroexample_157_2.model.remote
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

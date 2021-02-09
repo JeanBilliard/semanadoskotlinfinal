@@ -1,10 +1,10 @@
-package com.example.retroexample_157_2
+package com.example.retroexample_157_2.model
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.retroexample_157_2.remote.MarsRealState
-import com.example.retroexample_157_2.remote.RetrofitClient
+import com.example.retroexample_157_2.model.remote.MarsRealState
+import com.example.retroexample_157_2.model.remote.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -12,7 +12,7 @@ import retrofit2.Response
 class MarsRepository {
 
     private val retrofitClient = RetrofitClient.getRetrofit()
-    private val dataFromInternet = MutableLiveData<List<MarsRealState>>()
+    val dataFromInternet = MutableLiveData<List<MarsRealState>>()
 
     fun fetchDataMars(): LiveData<List<MarsRealState>> {  // Vieja confiable
             Log.d("REPO", "VIEJA CONFIABLE")
@@ -33,6 +33,21 @@ class MarsRepository {
                 }
             })
         return dataFromInternet
+    }
+
+
+    // Obtener datos con corutinas
+    suspend fun fetchDataFromInternetCoroutines()  {
+        try {
+            val response = retrofitClient.fetchMarsDataCoroutine()
+            when(response.code()) {
+                in 200..299 -> dataFromInternet.value = response.body()
+                in 300..301 -> Log.d("REPO","${response.code()} --- ${response.errorBody()}")
+                else -> Log.d("REPO","${response.code()} --- ${response.errorBody().toString()}")
+            }
+        } catch (t: Throwable) {
+            Log.e("REPO", "${t.message}")
+        }
     }
 
 }

@@ -1,4 +1,4 @@
-package com.example.retroexample_157_2.remote
+package com.example.retroexample_157_2.model.remote
 
 import retrofit2.Call
 import retrofit2.Response
@@ -11,5 +11,6 @@ interface MarsAPI {
 
     @GET("realestate")
     suspend fun fetchMarsDataCoroutine() : Response<List<MarsRealState>> // nueva forma
+
 
 }
