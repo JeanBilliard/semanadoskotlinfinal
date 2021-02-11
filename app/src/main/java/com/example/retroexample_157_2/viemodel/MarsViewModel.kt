@@ -1,23 +1,31 @@
 package com.example.retroexample_157_2.viemodel
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.retroexample_157_2.MarsDataBase
 import com.example.retroexample_157_2.model.MarsRepository
 import com.example.retroexample_157_2.model.remote.MarsRealState
 import kotlinx.coroutines.launch
 
-class MarsViewModel : ViewModel() {
+class MarsViewModel (application: Application) :
+    AndroidViewModel(application){
 
     private val repository: MarsRepository
-    val livedataFromInternet: LiveData<List<MarsRealState>>
+    val allMars: LiveData<List<MarsRealState>>
 
     init {
-        repository = MarsRepository()
+        val marsDao = MarsDataBase.getDataBase(application).getMarsDao()
+        repository = MarsRepository(marsDao)
+        allMars = repository.marsInternet
         viewModelScope.launch {
             repository.fetchDataFromInternetCoroutines()
         }
-        livedataFromInternet = repository.dataFromInternet
+
     }
 
+
 }
+
+
