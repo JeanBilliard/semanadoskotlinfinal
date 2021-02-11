@@ -48,6 +48,15 @@ class FirstFragment : Fragment() {
            adapter.update(it)
             }
         })
+        adapter.selectedItem().observe(viewLifecycleOwner, Observer {
+            it?.let{
+                val bundle = Bundle()
+                bundle.putString("id", it.id)
+                findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment,bundle)
+            }
+        })
+
 
         }
     }
+

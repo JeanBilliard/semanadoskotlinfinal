@@ -24,7 +24,10 @@ class MarsViewModel (application: Application) :
         }
 
     }
-
+    // activar en Dao -Repositorio-viewModel
+fun getMarsById (id: String):LiveData<MarsRealState>{
+    return repository.getMarsById(id)
+}
 
 }
 

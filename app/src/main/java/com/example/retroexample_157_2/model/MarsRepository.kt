@@ -30,5 +30,7 @@ class MarsRepository ( private val marsDao: MarsDao) {
             Log.e("REPO", "${t.message}")
         }
     }
-
+ fun getMarsById(id:String):LiveData<MarsRealState>{
+     return marsDao.getMarsById(id)
+ }
 }
